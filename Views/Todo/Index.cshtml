@@ -1,0 +1,21 @@
+@model List<string> 
+
+<html>
+<body>
+<!-- Comentário HTML -->
+@* Comentário C# *@
+    <p>@Model.Count()</p>
+
+    <table>
+
+        @foreach(string item in Model)
+        {
+            <tr>
+                <td>@item</td>
+            </tr>
+        }
+
+
+    </table>
+</body>
+</html>
