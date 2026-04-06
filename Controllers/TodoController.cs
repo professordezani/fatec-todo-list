@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 public class TodoController : Controller
 {
     // atributo:
-    private List<string> tasks = new List<string>();
+    private List<Todo> tasks = new List<Todo>();
     
     // http://localhost:1234/todo/index
     public ActionResult Index()
     {
-        tasks.Add("Estudar");
-        tasks.Add("Trabalhar");
-        tasks.Add("Dormir");
+        tasks.Add(new Todo("1", "Estudar"));
+        tasks.Add(new Todo("2", "Trabalhar"));
 
         // /Views/Todo/Index.cshtml
         return View(tasks);
