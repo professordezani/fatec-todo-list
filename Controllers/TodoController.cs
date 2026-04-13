@@ -15,4 +15,9 @@ public class TodoController : Controller
         // /Views/Todo/Index.cshtml
         return View(tasks);
     }
+
+    public ActionResult Create()
+    {
+        return View();
+    }
 }
