@@ -22,7 +22,22 @@ public class TodoController : Controller
     [HttpPost]
     public ActionResult Create(Todo t) // Data Binding
     {
+        t.Id = Guid.NewGuid().ToString();
         tasks.Add(t);
         return RedirectToAction("Index");
+    }
+
+    public ActionResult Delete(string id)
+    {
+        var task = tasks.Single(t => t.Id == id); // LinQ
+        tasks.Remove(task);
+
+        return RedirectToAction("Index");
+    }
+
+    public ActionResult Update(string id)
+    {
+        var task = tasks.Single(t => t.Id == id); // LinQ
+        return View(task);
     }
 }

@@ -1,0 +1,20 @@
+@model Todo
+<html>
+<head>
+
+</head>
+<body>
+    
+    <form action="/todo/update/@Model.Id" method="POST">
+
+        <label>Description</label>
+        <input name="Description" value="@Model.Description"/>
+
+        <br/>
+
+        <button>Salvar</button>
+
+    </form>
+
+</body>
+</html>
