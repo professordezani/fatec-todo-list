@@ -26,6 +26,12 @@ public class Todo
     public string Description {get; set; }
     public bool Done { get; set; }
 
+    public Todo()
+    {
+        Id = "0";
+        Done = false;
+    }
+
     public Todo(string id, string description)
     {
         Id = id;
