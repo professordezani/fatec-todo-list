@@ -1,16 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 
-
 public class TodoController : Controller
 {
-    // atributo:
-    private static List<Todo> tasks = new List<Todo>();
-    
+    private DatabaseContext db;
+    public TodoController(DatabaseContext db)
+    {
+        this.db = db;
+    }
+
     // http://localhost:1234/todo/index
     public ActionResult Index()
     {
         // /Views/Todo/Index.cshtml
-        return View(tasks);
+        return View(db.Todo.ToList()); // ~ SELECT * FROM Todo
     }
 
     [HttpGet]
@@ -23,21 +25,25 @@ public class TodoController : Controller
     public ActionResult Create(Todo t) // Data Binding
     {
         t.Id = Guid.NewGuid().ToString();
-        tasks.Add(t);
+
+        db.Todo.Add(t); // ~ INSERT INTO Todo VALUES (t...)
+        db.SaveChanges(); // commit
+
         return RedirectToAction("Index");
     }
 
     public ActionResult Delete(string id)
     {
-        var task = tasks.Single(t => t.Id == id); // LinQ
-        tasks.Remove(task);
+        var task = db.Todo.Single(t => t.Id == id); // LinQ
+        db.Todo.Remove(task); // ~ DELETE FROM Todo WHERE Id = id
 
         return RedirectToAction("Index");
     }
 
     public ActionResult Update(string id)
     {
-        var task = tasks.Single(t => t.Id == id); // LinQ
+        // SELECT * FROM Todo WHERE Id = id
+        var task = db.Todo.Single(t => t.Id == id); // LinQ
         return View(task);
     }
 }
