@@ -36,6 +36,7 @@ public class TodoController : Controller
     {
         var task = db.Todo.Single(t => t.Id == id); // LinQ
         db.Todo.Remove(task); // ~ DELETE FROM Todo WHERE Id = id
+        db.SaveChanges();
 
         return RedirectToAction("Index");
     }
